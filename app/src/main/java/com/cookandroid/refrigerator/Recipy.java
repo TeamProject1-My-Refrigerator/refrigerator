@@ -387,7 +387,7 @@ public class Recipy extends Activity {
                 ++categoryIndex;
             }
         }
-
         return categoryList;
     }
+
 }

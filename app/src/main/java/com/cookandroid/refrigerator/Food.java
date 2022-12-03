@@ -17,7 +17,7 @@ public class Food implements Parcelable {
     String expiration_date;      //date 타입 변경 가능 유통기한
     int num;                     //개수
     String storage;              //보관법
-    int cool;                   //0 냉장 1 냉동
+    int cool;                    //0 냉장 1 냉동 2 실온
     public Food(String name){
         this.name = name;
     }

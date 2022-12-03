@@ -364,7 +364,8 @@ public class MainActivity extends AppCompatActivity {
 
             "9. 완성그릇에 볶음우동을 담고 마요네즈를 뿌려준다.\n" +
 
-            "10. 훈연멸치가루, 쪽파를 올려 마무리한다.\n", "https://youtu.be/zRg4nxIv3j8", "일식", new ArrayList<String>(Arrays.asList("양배추","양파","돼지고기","대파")),
+            "10. 훈연멸치가루, 쪽파를 올려 마무리" +
+                    "한다.\n", "https://youtu.be/zRg4nxIv3j8", "일식", new ArrayList<String>(Arrays.asList("양배추","양파","돼지고기","대파")),
 
             new ArrayList<String>(Arrays.asList("우동면","멸치가루","쪽파","당근")), R.drawable.friedudong, R.drawable.youtube);
 
@@ -708,7 +709,6 @@ public class MainActivity extends AppCompatActivity {
         btnRecipy = (ImageButton)findViewById(R.id.btnRecipy);
         btnIce = (Switch) findViewById(R.id.btnIce);
         btnMerge = (ImageButton)findViewById(R.id.btnMerge);
-        btnunion = (ImageView)findViewById(R.id.union);
         cool = (TextView)findViewById(R.id.textice);
         merge = (TextView)findViewById(R.id.textmerge);
 
@@ -963,7 +963,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    //재료 추가
 
+    //재료 삭제
     //레시피 검색
     public static final ArrayList<RecipyInfo> findRecipe(@NotNull ArrayList<RecipyInfo> recipeList, @NotNull ArrayList<Food> foodlist) {
         Intrinsics.checkNotNullParameter(recipeList, "recipeList");
@@ -1168,7 +1170,10 @@ public class MainActivity extends AppCompatActivity {
         for(var8 = ((Collection)sortedList).size(); x < var8; ++x) {
             list.set(start + x, sortedList.get(x));
         }
+    }
 
+    public ArrayList<Food> getFoodList(){
+        return foodlist;
     }
 
 }

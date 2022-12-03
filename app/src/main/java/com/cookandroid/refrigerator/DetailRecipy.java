@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.ArrayList;
+
 public class DetailRecipy extends Activity {
 
     TextView recipy_name, recipy_need, recipy_recipy;
@@ -97,5 +99,19 @@ public class DetailRecipy extends Activity {
             .setPackage("com.google.android.youtube"));
          */
 
+    }
+    //레시피 화면에서 사용하는 재료의 정보를 출력하기 위해 사용할 재료를 검색하는 메소드(필수재료와 재료리스트를 비교)
+    public final ArrayList<Food> findUsingFood(){
+        MainActivity mainActivity = new MainActivity();
+        mainActivity.getFoodList();
+        ArrayList<Food> usingFoodList = new ArrayList<>();  //사용할 재료 리스트
+
+        Intent rxIntent = getIntent();
+        Bundle extras = rxIntent.getExtras();
+        RecipyInfo recipyInfo;
+
+        recipyInfo = (RecipyInfo) rxIntent.getSerializableExtra("Object");
+        size = recipyInfo.getEssentialIngredients().size()-1;
+        for(int i=0; i<)
     }
 }

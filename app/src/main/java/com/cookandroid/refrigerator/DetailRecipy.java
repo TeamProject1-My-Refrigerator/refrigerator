@@ -100,18 +100,27 @@ public class DetailRecipy extends Activity {
          */
 
     }
-    //레시피 화면에서 사용하는 재료의 정보를 출력하기 위해 사용할 재료를 검색하는 메소드(필수재료와 재료리스트를 비교)
+    //계환
+    //레시피 화면에서 사용하는 재료의 정보를 출력하기 위해 사용할 재료를 검색하는 메소드(필수재료와 보유재료를 비교)
     public final ArrayList<Food> findUsingFood(){
         MainActivity mainActivity = new MainActivity();
-        mainActivity.getFoodList();
-        ArrayList<Food> usingFoodList = new ArrayList<>();  //사용할 재료 리스트
+        ArrayList<Food> foodList = mainActivity.getFoodList();  //보유 재료 리스트 (mainActivty에 get메소드 만들었습니다.)
+        ArrayList<Food> usingFoodList = new ArrayList<>();  //사용할 재료 리스트 (이 리스트에 저장해서 반환)
 
         Intent rxIntent = getIntent();
         Bundle extras = rxIntent.getExtras();
         RecipyInfo recipyInfo;
-
         recipyInfo = (RecipyInfo) rxIntent.getSerializableExtra("Object");
+
         size = recipyInfo.getEssentialIngredients().size()-1;
-        for(int i=0; i<)
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < foodList.size(); j++) {
+                if(recipyInfo.getEssentialIngredients().get(i) == foodList.get(j).getName()){
+                    usingFoodList.add(foodList.get(j));
+                    break;   //같은 이름의 재료 중 유통기한이 얼마 안남은 재료를 선택하기 위해 찾으면 반복문을 빠져나간다.
+                }
+            }
+        }
+        return usingFoodList;
     }
 }

@@ -1172,8 +1172,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //계환
     public ArrayList<Food> getFoodList(){
         return foodlist;
+    }
+    //레시피->재료정보확인 화면에서 재료 삭제할 때 사용할 메소드
+    public void setFoodList(ArrayList<Food> newFoodList) {
+        foodlist = newFoodList;
     }
 
 }

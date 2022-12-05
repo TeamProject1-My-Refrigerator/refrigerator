@@ -44,7 +44,7 @@ import kotlin.jvm.internal.Intrinsics;
 자료구조 메소드
 순
  */
-public class MainActivity extends AppCompatActivity implements FoodPlus.FragmentPlusListener{
+public class MainActivity extends AppCompatActivity implements FoodPlus.FragmentPlusListener, Setting.FragmentSettingListener{
 
     LinearLayout layout;
     ImageButton btnRecipy;
@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     int isItIce = 0;            //0 냉장, 1 냉동, 2상온
 
     int change = 0; //0 기본, 1 검색
+
+    int pushday_count = 3;
+    int ispush = 0;
 
     //data list
     ArrayList<Food> foodlist = new ArrayList<>();           // food list
@@ -860,7 +863,11 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 ButtonInit();
                 btnSetting.setImageResource(R.drawable.setting_on);
                 Setting setting = new Setting();
+                Bundle bundle = new Bundle();
+                bundle.putInt("pushday", pushday_count);
+                bundle.putInt("push", ispush);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
                 fragmentTransaction.replace(R.id.frame_layout, setting);
                 fragmentTransaction.addToBackStack("setting");
                 fragmentTransaction.commit();
@@ -872,7 +879,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         btnRecipy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layout.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
                 ButtonInit();
                 btnRecipy.setImageResource(R.drawable.recipy_on);
                 alertfoodlist.clear();
@@ -1323,7 +1330,12 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         }
         Toast.makeText(getApplicationContext(), " 재료가 추가 되었습니다 !", Toast.LENGTH_SHORT).show();
     }
-
+    @Override
+    public void onInputSettingSend(int pushday, int push){
+        pushday_count = pushday;
+        ispush = push;
+        Toast.makeText(getApplicationContext(), " 설정이 저장 되었습니다 !", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

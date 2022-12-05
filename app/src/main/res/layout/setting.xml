@@ -101,7 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#F8F8F8"
-
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -139,8 +138,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <android.widget.Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_blue"
+            android:text="저장"
+            android:id="@+id/setsave" />
 
     </LinearLayout>
 

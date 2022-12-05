@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ImageButton btnSetting;
     TextView merge;
     TextView cool;
-    int isItDDay = 0;                    //0 기본, 1 유통기한,2 입고날짜
+    int isItDDay = 0;                    //0 이름(구현필요), 1 유통기한,2 입고날짜
     int size = 0;
 
-    int isItIce = 0;            //0 냉장, 1 냉동
+    int isItIce = 0;            //0 냉장, 1 냉동, 2상온
 
     //data list
     ArrayList<Food> foodlist = new ArrayList<>();           // food list
@@ -727,8 +727,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         IceFragment fragice = new IceFragment();
         CoolFragment fragcool = new CoolFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame_layout, fragice);
-        fragmentTransaction.addToBackStack("fragice");
+        fragmentTransaction.add(R.id.frame_layout, fragcool);
+        fragmentTransaction.addToBackStack("fragcool");
         fragmentTransaction.commit();
 
         foodlist.add(kimchi); foodlist.add(leek_0); foodlist.add(leek_1); foodlist.add(crab);
@@ -797,6 +797,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 layout.setVisibility(View.VISIBLE);
                 ButtonInit();
                 btnHome.setImageResource(R.drawable.home_on);
+                isItIce = 1;
+                isItDDay = 0;
                 CoolFragment fragCool = new CoolFragment();
                 Bundle data = new Bundle();
                 data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
@@ -884,6 +886,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
             public void onClick(View view) {
                 if(isItIce == 0){
                     isItIce = 1;
+                    isItDDay = 0;
                     btnIce.setImageResource(R.drawable.iceout);
                     btnMerge.setImageResource(R.drawable.mergename);
                     Bundle data = new Bundle();
@@ -898,6 +901,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 }
                 else if(isItIce == 1){
                     isItIce = 0;
+                    isItDDay = 0;
                     btnIce.setImageResource(R.drawable.coolout);
                     btnMerge.setImageResource(R.drawable.mergename);
                     Bundle data = new Bundle();
@@ -938,6 +942,18 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                     data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) foodlistDDaySort);
 
                     if(isItIce == 0){
+                        coollist.clear();
+                        coollist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
+                    else{
+                        icelist.clear();
+                        icelist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
+
+
+                    if(isItIce == 0){
                         CoolFragment fragCool = new CoolFragment();
                         fragCool.setArguments(data);
 
@@ -976,6 +992,17 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                     data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) foodlistDateSort);
 
                     if(isItIce == 0){
+                        coollist.clear();
+                        coollist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
+                    else{
+                        icelist.clear();
+                        icelist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
+
+                    if(isItIce == 0){
                         CoolFragment fragCool = new CoolFragment();
                         fragCool.setArguments(data);
 
@@ -1012,6 +1039,17 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                     mergeSort(foodlistDDaySort,0,foodlistDDaySort.size()-1);
                     Bundle data = new Bundle();
                     data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) foodlistDDaySort);
+
+                    if(isItIce == 0){
+                        coollist.clear();
+                        coollist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
+                    else{
+                        icelist.clear();
+                        icelist = (ArrayList<Food>)foodlistDDaySort.clone();
+
+                    }
 
                     if(isItIce == 0){
                         CoolFragment fragCool = new CoolFragment();
@@ -1197,7 +1235,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         int indexB = mid + 1;
 
         while(indexA <= mid && indexB <= end) {
-            if ( changeInt(((Food)list.get(indexA)).getInput_date()) > changeInt(((Food)list.get(indexB)).getInput_date()) ) {
+            if ( changeInt(((Food)list.get(indexA)).getInput_date()) < changeInt(((Food)list.get(indexB)).getInput_date()) ) {
                 sortedList.add(list.get(indexA));
                 ++indexA;
             } else {

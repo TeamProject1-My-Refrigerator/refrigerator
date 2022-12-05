@@ -21,9 +21,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:id="@+id/layout_tool"
             android:orientation="horizontal"
             android:background="#F8F8F8">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnchange"
+                android:text="검색" />
 
             <ImageButton
                 android:id="@+id/btnMerge"
@@ -37,10 +44,17 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:scaleType="fitXY"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="10dp"
                 android:background="#F8F8F8"
                 android:src="@drawable/coolout"
                 android:id="@+id/btnIce" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtsearch"
+                android:hint="serarh"
+                android:visibility="gone" />
 
         </LinearLayout>
 

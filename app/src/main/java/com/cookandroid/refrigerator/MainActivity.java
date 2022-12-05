@@ -15,6 +15,7 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,12 +53,16 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ImageButton btnIce;                               //레시피 , 냉장버튼
     ImageButton btnplusa;
     ImageButton btnSetting;
+    Button search;
+    EditText search_bar;
     TextView merge;
     TextView cool;
     int isItDDay = 0;                    //0 이름(구현필요), 1 유통기한,2 입고날짜
     int size = 0;
 
     int isItIce = 0;            //0 냉장, 1 냉동, 2상온
+
+    int change = 0; //0 기본, 1 검색
 
     //data list
     ArrayList<Food> foodlist = new ArrayList<>();           // food list
@@ -721,6 +726,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         btnSetting = (ImageButton) findViewById(R.id.btnsetting);
         btnHome = (ImageButton) findViewById(R.id.btnHome);
         layout = (LinearLayout) findViewById(R.id.layout_tool);
+        search = (Button)findViewById(R.id.btnchange);
+        search_bar = (EditText)findViewById(R.id.edtsearch);
 
 
 
@@ -790,6 +797,26 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
             btnunion.setImageResource(R.drawable.union);
         }
          */
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(change == 0){
+                    change = 1;
+                    btnMerge.setVisibility(View.GONE);
+                    btnIce.setVisibility(View.GONE);
+                    search.setText("닫기");
+                    search_bar.setVisibility(View.VISIBLE);
+                }
+                else{
+                    change = 0;
+                    btnMerge.setVisibility(View.VISIBLE);
+                    btnIce.setVisibility(View.VISIBLE);
+                    search.setText("검색");
+                    search_bar.setVisibility(View.GONE);
+                }
+            }
+        });
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -867,7 +867,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 bundle.putInt("pushday", pushday_count);
                 bundle.putInt("push", ispush);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
+                setting.setArguments(bundle);
                 fragmentTransaction.replace(R.id.frame_layout, setting);
                 fragmentTransaction.addToBackStack("setting");
                 fragmentTransaction.commit();

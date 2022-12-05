@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,15 +66,29 @@ public class FoodPlus extends Fragment {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = String.valueOf(edtname.getText());
-                inputdate = edtinpyear.getText() +"-"+edtinpmonth.getText() +"-" + edtinpday.getText();
-                expdate = edtessyear.getText() +"-"+edtessmonth.getText() +"-" + edtessday.getText();
+                if(edtname.getText().toString().equals("") || edtname.getText().toString() == null){
+                    Toast.makeText(getActivity().getApplicationContext(), " 이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                }
+                else if(edtessyear.getText().toString().equals("") || edtessmonth.getText().toString().equals("") || edtessday.getText().toString().equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), " 유통기한을 입력해 주세요.", Toast.LENGTH_SHORT).show();
 
-                //food 생성 후 activity 에 전송
-                Food food = new Food(name, expdate, inputdate, cool, "보관법", R.drawable.apple);
-                listener.onInputSend(food);
+                }
+                else if(edtinpyear.getText().toString().equals("") || edtinpmonth.getText().toString().equals("") || edtinpday.getText().toString().equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), " 입고기한을 입력해 주세요.", Toast.LENGTH_SHORT).show();
 
-                //finish(); <- 액티비티 종료
+                }
+                else{
+                    name = String.valueOf(edtname.getText());
+                    inputdate = edtinpyear.getText() +"-"+edtinpmonth.getText() +"-" + edtinpday.getText();
+                    expdate = edtessyear.getText() +"-"+edtessmonth.getText() +"-" + edtessday.getText();
+
+                    //food 생성 후 activity 에 전송
+                    Food food = new Food(name, expdate, inputdate, cool, "보관법", R.drawable.apple);
+                    listener.onInputSend(food);
+
+                    //finish(); <- 액티비티 종료
+                }
+
             }
         });
 

@@ -100,7 +100,7 @@ public class DetailFood extends Activity {
                     food_indatechan.setVisibility(View.VISIBLE);
                     food_indatechan.setText(indateonly);
                     food_storagychan.setVisibility(View.VISIBLE);
-                    food_storagychan.setText(food_storagy.getText());
+                    food_storagychan.setText(storageonly);
                     //text
                     food_name.setVisibility(View.GONE);
                     food_date.setVisibility(View.GONE);

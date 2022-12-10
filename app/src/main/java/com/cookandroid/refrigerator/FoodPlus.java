@@ -20,6 +20,10 @@ import androidx.fragment.app.Fragment;
 
 public class FoodPlus extends Fragment {
 
+    String[] namearr = new String[]{"김치", "대파", "꽃게", "무", "된장", "양파", "청양고추", "고등어", "간 돼지고기", "돼지고기", "소고기", "마라소스", "콩나물", "배추", "두부", "대패삼겹살", "닭고기", "베이컨", "우유", "상추", "치즈", "고구마", "달걀", "새우", "마늘", "다진마늘", "우동면", "멸치", "떡", "어묵", "시금치", "단무지", "당근", "숙주", "사과", "파프리카", "콜라", "오이", "소세지", "오렌지", "연어", "단호박", "수박"};
+    int[] imagearr = new int[]{ R.drawable.kimchi , R.drawable.leek, R.drawable.crap, R.drawable.radish0, R.drawable.soybean, R.drawable.onion, R.drawable.pepper, R.drawable.mackerel, R.drawable.groundpork, R.drawable.pork, R.drawable.beef, R.drawable.mara, R.drawable.beentree, R.drawable.cabbage, R.drawable.tofu, R.drawable.shaved, R.drawable.chicken, R.drawable.bacon, R.drawable.milk, R.drawable.lettuce, R.drawable.cheese, R.drawable.goguma, R.drawable.egg, R.drawable.shirimp, R.drawable.garlic, R.drawable.garliccrush, R.drawable.udonnoodle, R.drawable.anchovy, R.drawable.dduck, R.drawable.fishcake, R.drawable.spinach, R.drawable.danmuzi, R.drawable.carrot, R.drawable.sukju, R.drawable.apple, R.drawable.paprika, R.drawable.coke, R.drawable.cucumber, R.drawable.sausage, R.drawable.orange, R.drawable.salmon, R.drawable.sweetpum, R.drawable.watermelon};
+    String[] stoarr = new String[]{};
+
     EditText edtname, edtessyear, edtessmonth, edtessday, edtinpyear, edtinpmonth, edtinpday;
     Button btnadd, btncool, btnice, btnusual;
     String inputdate = "";
@@ -82,8 +86,18 @@ public class FoodPlus extends Fragment {
                     inputdate = edtinpyear.getText() +"-"+edtinpmonth.getText() +"-" + edtinpday.getText();
                     expdate = edtessyear.getText() +"-"+edtessmonth.getText() +"-" + edtessday.getText();
 
+                    int imageset;
+                    imageset = R.drawable.apple;
+                    String storag = "보관법";
+
                     //food 생성 후 activity 에 전송
-                    Food food = new Food(name, expdate, inputdate, cool, "보관법", R.drawable.apple);
+                    for(int i = 0; i < namearr.length; i++){
+                        if(name.equals(namearr[i])){
+                            imageset = imagearr[i];
+                            break;
+                        }
+                    }
+                    Food food = new Food(name, expdate, inputdate, cool, storag, imageset);
                     listener.onInputSend(food);
 
                     //finish(); <- 액티비티 종료

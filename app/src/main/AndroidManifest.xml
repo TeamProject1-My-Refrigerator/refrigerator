@@ -29,6 +29,7 @@
         <activity android:name=".DetailRecipy" android:label="레시피 상세" />
         <activity android:name=".DetailFood" android:label="식재료 상세" />
         <activity android:name=".HelpActivity" android:label="환경 설정" />
+        <activity android:name=".moreRecipy" android:label="추가 정보" />
 
     </application>
 

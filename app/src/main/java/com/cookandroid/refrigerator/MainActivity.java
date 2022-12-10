@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ImageButton btnplusa;
     ImageButton btnSetting;
     Button search;
+    Button close;
     EditText search_bar;
     TextView merge;
     TextView cool;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
 
     int pushday_count = 3;
     int ispush = 0;
+    boolean isitSearch = false;
+    String searchname ="";
 
     //data list
     ArrayList<Food> foodlist = new ArrayList<>();           // food list
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ArrayList<Food> icelist = new ArrayList<>();
     ArrayList<Food> coollist = new ArrayList<>();
     ArrayList<Food> alertfoodlist = new ArrayList<>();
+    ArrayList<Food> searchlist = new ArrayList<>();
 
 
 
@@ -731,6 +735,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         layout = (LinearLayout) findViewById(R.id.layout_tool);
         search = (Button)findViewById(R.id.btnchange);
         search_bar = (EditText)findViewById(R.id.edtsearch);
+        close = (Button)findViewById(R.id.btnclose);
 
 
 
@@ -788,18 +793,15 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
 
 
 
-        //
-        AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
-        dlg.setTitle("도움말");
-        dlg.setView(R.layout.dialog);
-        dlg.setNegativeButton("닫기", null);
-        dlg.show();
+
 
         /*
         if(notifyExpirationDate(foodlist)){
             btnunion.setImageResource(R.drawable.union);
         }
          */
+
+
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -808,16 +810,59 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                     change = 1;
                     btnMerge.setVisibility(View.GONE);
                     btnIce.setVisibility(View.GONE);
-                    search.setText("닫기");
+                    close.setVisibility(View.VISIBLE);
                     search_bar.setVisibility(View.VISIBLE);
+                    isitSearch = true;
                 }
                 else{
-                    change = 0;
-                    btnMerge.setVisibility(View.VISIBLE);
-                    btnIce.setVisibility(View.VISIBLE);
-                    search.setText("검색");
-                    search_bar.setVisibility(View.GONE);
+                    String input = search_bar.getText().toString();
+                    searchname = input;
+                    searchlist.clear();
+                    for(int i = 0; i < foodlist.size(); i++){
+                        if(input.equals(foodlist.get(i).getName())){
+                            searchlist.add(foodlist.get(i));
+                        }
+                    }
+                    CoolFragment searchfragment = new CoolFragment();
+                    Bundle searchdata = new Bundle();
+                    FragmentTransaction fragmentTransactionsear = getSupportFragmentManager().beginTransaction();
+                    searchdata.putParcelableArrayList("Food", searchlist);
+                    searchfragment.setArguments(searchdata);
+                    fragmentTransactionsear.add(R.id.frame_layout, searchfragment);
+                    fragmentTransactionsear.commit();
                 }
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                change = 0;
+                btnMerge.setVisibility(View.VISIBLE);
+                btnIce.setVisibility(View.VISIBLE);
+                close.setVisibility(View.GONE);
+                search_bar.setVisibility(View.GONE);
+                isitSearch =false;
+
+                //새로운화면 출력 준비
+
+                ButtonInit();
+                btnHome.setImageResource(R.drawable.home_on);
+                isItIce = 0;
+                isItDDay = 0;
+                btnIce.setImageResource(R.drawable.coolout);
+                isitSearch = false;
+
+                CoolFragment fragCool = new CoolFragment();
+                Bundle data = new Bundle();
+                data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
+                fragCool.setArguments(data);
+
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
+                fragmentTransaction2.commit();
+                //삭제 부분 다시 고쳐야함
+                //fragment 통일 필요
             }
         });
 
@@ -827,8 +872,11 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 layout.setVisibility(View.VISIBLE);
                 ButtonInit();
                 btnHome.setImageResource(R.drawable.home_on);
-                isItIce = 1;
+                isItIce = 0;
                 isItDDay = 0;
+                btnIce.setImageResource(R.drawable.coolout);
+                isitSearch = false;
+
                 CoolFragment fragCool = new CoolFragment();
                 Bundle data = new Bundle();
                 data.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
@@ -884,7 +932,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 btnRecipy.setImageResource(R.drawable.recipy_on);
                 alertfoodlist.clear();
                 for(int i = 0; i < foodlist.size(); i++){
-                    if(foodlist.get(i).getExpiration_dday() <= 3){
+                    if( 0 <= foodlist.get(i).getExpiration_dday() &&foodlist.get(i).getExpiration_dday() <= 3){
                         alertfoodlist.add(foodlist.get(i));
                     }
                 }
@@ -1337,46 +1385,202 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         Toast.makeText(getApplicationContext(), " 설정이 저장 되었습니다 !", Toast.LENGTH_SHORT).show();
     }
 
+    //재료 삭제 4~5, 재료 수정6~7
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 4) {
-            int point = data.getIntExtra("Point", 0);
-            coollist.remove(point);
-            foodlist = (ArrayList<Food>) coollist.clone();
-            for(int i = 0; i < icelist.size(); i++){
-                foodlist.add(icelist.get(i));
+            if(isitSearch){
+                int point = data.getIntExtra("Point", 0);
+                searchlist.remove(point);
+                for(int i = 0; i < foodlist.size(); ){
+                    if(searchname.equals(foodlist.get(i).getName())){
+                        if(point == 0){
+                            foodlist.remove(i);
+                            break;
+                        }
+                        else{
+                            point--;
+                            i++;
+                        }
+                    }
+                    else{
+                        i++;
+                    }
+                }
+
+                icelist.clear();
+                coollist.clear();
+                for(int i = 0; i < foodlist.size(); i++){
+                    if(foodlist.get(i).getCool() == 0){
+                        coollist.add(foodlist.get(i));
+                    }
+                    else{
+                        icelist.add(foodlist.get(i));
+                    }
+                }
+                CoolFragment searchfragment = new CoolFragment();
+                Bundle searchdata = new Bundle();
+                FragmentTransaction fragmentTransactionsear = getSupportFragmentManager().beginTransaction();
+                searchdata.putParcelableArrayList("Food", searchlist);
+                searchfragment.setArguments(searchdata);
+                fragmentTransactionsear.add(R.id.frame_layout, searchfragment);
+                fragmentTransactionsear.commit();
+
+            }
+            else{
+                int point = data.getIntExtra("Point", 0);
+                coollist.remove(point);
+                foodlist = (ArrayList<Food>) coollist.clone();
+                for(int i = 0; i < icelist.size(); i++){
+                    foodlist.add(icelist.get(i));
+                }
+
+                CoolFragment fragCool = new CoolFragment();
+                Bundle data2 = new Bundle();
+                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
+                fragCool.setArguments(data2);
+
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
+                fragmentTransaction2.commit();
             }
 
-            CoolFragment fragCool = new CoolFragment();
-            Bundle data2 = new Bundle();
-            data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
-            fragCool.setArguments(data2);
-
-            FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction2.replace(R.id.frame_layout, fragCool);
-            fragmentTransaction2.commit();
         }
         else if(resultCode == 5){
-            int point = data.getIntExtra("Point", 0);
-            icelist.remove(point);
-            foodlist = (ArrayList<Food>) icelist.clone();
-            for(int i = 0; i < coollist.size(); i++){
-                foodlist.add(coollist.get(i));
+
+            if(isitSearch){
+                int point = data.getIntExtra("Point", 0);
+                searchlist.remove(point);
+                for(int i = 0; i < foodlist.size(); ){
+                    if(searchname.equals(foodlist.get(i).getName())){
+                        if(point == 0){
+                            foodlist.remove(i);
+                            break;
+                        }
+                        else{
+                            point--;
+                            i++;
+                        }
+                    }
+                    else{
+                        i++;
+                    }
+                }
+                icelist.clear();
+                coollist.clear();
+                for(int i = 0; i < foodlist.size(); i++){
+                    if(foodlist.get(i).getCool() == 0){
+                        coollist.add(foodlist.get(i));
+                    }
+                    else{
+                        icelist.add(foodlist.get(i));
+                    }
+                }
+
+                CoolFragment searchfragment = new CoolFragment();
+                Bundle searchdata = new Bundle();
+                FragmentTransaction fragmentTransactionsear = getSupportFragmentManager().beginTransaction();
+                searchdata.putParcelableArrayList("Food", searchlist);
+                searchfragment.setArguments(searchdata);
+                fragmentTransactionsear.add(R.id.frame_layout, searchfragment);
+                fragmentTransactionsear.commit();
+
+            }
+            else{
+                int point = data.getIntExtra("Point", 0);
+                icelist.remove(point);
+                foodlist = (ArrayList<Food>) icelist.clone();
+                for(int i = 0; i < coollist.size(); i++){
+                    foodlist.add(coollist.get(i));
+                }
+
+                IceFragment iceFragment = new IceFragment();
+                Bundle data22 = new Bundle();
+                data22.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) icelist);
+                IceFragment fragIce = new IceFragment();
+                fragIce.setArguments(data22);
+
+                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction1.replace(R.id.frame_layout, fragIce);
+                fragmentTransaction1.commit();
             }
 
-            IceFragment iceFragment = new IceFragment();
-            Bundle data22 = new Bundle();
-            data22.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) icelist);
-            IceFragment fragIce = new IceFragment();
-            fragIce.setArguments(data22);
-
-            FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction1.replace(R.id.frame_layout, fragIce);
-            fragmentTransaction1.commit();
         }
-        else{
+        else if(resultCode == 6){
+            if(data != null){
+                int point = data.getIntExtra("Point", 0);
+                Food food = data.getParcelableExtra("Foodchange");
 
+                if(food.getCool() == 0){
+                    coollist.set(point, food);
+                    foodlist = (ArrayList<Food>) coollist.clone();
+                    for(int i = 0; i < icelist.size(); i++){
+                        foodlist.add(icelist.get(i));
+                    }
+                }
+                else{
+                    icelist.set(point, food);
+                    foodlist = (ArrayList<Food>) icelist.clone();
+                    for(int i = 0; i < coollist.size(); i++){
+                        foodlist.add(coollist.get(i));
+                    }
+                }
+
+                CoolFragment fragCool = new CoolFragment();
+                Bundle data2 = new Bundle();
+                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
+                fragCool.setArguments(data2);
+
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
+                fragmentTransaction2.commit();
+            }
+
+
+
+            Toast.makeText(getApplicationContext(), " 수정이 완료 되었습니다 !", Toast.LENGTH_SHORT).show();
+        }
+
+        else{
+            if(data != null){
+                int point = data.getIntExtra("Point", 0);
+                Food food = data.getParcelableExtra("Foodchange");
+
+                if(food.getCool() == 0){
+                    coollist.set(point, food);
+                    foodlist = (ArrayList<Food>) coollist.clone();
+                    for(int i = 0; i < icelist.size(); i++){
+                        foodlist.add(icelist.get(i));
+                    }
+                }
+                else{
+                    icelist.set(point, food);
+                    foodlist = (ArrayList<Food>) icelist.clone();
+                    for(int i = 0; i < coollist.size(); i++){
+                        foodlist.add(coollist.get(i));
+                    }
+                }
+
+                CoolFragment fragCool = new CoolFragment();
+                Bundle data2 = new Bundle();
+                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
+                fragCool.setArguments(data2);
+
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
+                fragmentTransaction2.commit();
+            }
+            else{
+
+            }
+            Toast.makeText(getApplicationContext(), " 변경이 완료되지 않음 !", Toast.LENGTH_SHORT).show();
+
+
+        }
+        if(requestCode == RESULT_CANCELED){
+            //뒤로가기 누르면 데이터 없음 근데 위의 경우 데이터 필요한데 result code 가 셋 됨 뒤로가기 눌러서 오류? 첨에 뒤로가기는 오류 x
+            //finish 넣어도 오류가 뜸 오류 자체도 문제
         }
     }
     public void ButtonInit(){

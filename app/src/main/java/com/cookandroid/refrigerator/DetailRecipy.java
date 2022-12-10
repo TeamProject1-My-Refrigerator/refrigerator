@@ -27,6 +27,7 @@ public class DetailRecipy extends Activity {
     int size;
     int i;
 
+    Button btmore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class DetailRecipy extends Activity {
         recipy_recipy = (TextView)findViewById(R.id.recipy_recipy);
         recipy_video = (ImageView) findViewById(R.id.recipy_video);
         recipy_add = (TextView)findViewById(R.id.recipy_add);
+        btmore = (Button)findViewById(R.id.btnmore);
         Intent rxIntent = getIntent();
         Bundle extras = rxIntent.getExtras();
         RecipyInfo recipyInfo;
@@ -84,6 +86,13 @@ public class DetailRecipy extends Activity {
 
 
         //동영상 주소 변경 구현 필요
+        btmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), moreRecipy.class);
+                startActivity(intent);
+            }
+        });
 
         recipy_video.setOnClickListener(new View.OnClickListener() {
             @Override

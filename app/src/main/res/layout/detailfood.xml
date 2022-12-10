@@ -12,6 +12,16 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnfoodchange"
+            android:text="재료수정"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_blue" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnfoodsub"
             android:text="재료삭제"
             android:textSize="20dp"
@@ -43,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/line"
+        android:orientation="vertical"
         android:layout_weight="1" >
 
         <TextView
@@ -50,11 +61,24 @@
             android:layout_height="match_parent"
             android:id="@+id/food_name"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25dp"
-            android:gravity="center"
             android:layout_marginLeft="8dp"
             android:text="food_name" />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/food_name_change"
+            android:text="edittext"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="gone" />
+
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -84,6 +108,28 @@
             android:text="입고날짜"
             android:id="@+id/food_indate" />
 
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/food_datecha"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:text="유통기한\n" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:text="입고날짜\n"
+            android:id="@+id/food_indatecha" />
+
 
     </LinearLayout>
 
@@ -99,6 +145,15 @@
             android:layout_marginLeft="8dp"
 
             android:text="보관법" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/food_storagycha"
+            android:layout_marginLeft="8dp"
+
+            android:visibility="gone"
+            android:text="보관법\n" />
 
     </LinearLayout>
 

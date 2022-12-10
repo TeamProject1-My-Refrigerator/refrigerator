@@ -29,8 +29,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnchange"
-                android:text="검색" />
+                android:id="@+id/btnclose"
+                android:visibility="gone"
+                android:text="닫기" />
 
             <ImageButton
                 android:id="@+id/btnMerge"
@@ -55,6 +56,12 @@
                 android:id="@+id/edtsearch"
                 android:hint="serarh"
                 android:visibility="gone" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnchange"
+                android:text="검색" />
 
         </LinearLayout>
 

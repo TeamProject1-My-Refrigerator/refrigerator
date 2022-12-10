@@ -33,7 +33,7 @@ public class Recipy extends Activity {
     ArrayList<RecipyInfo> sublist = new ArrayList<>();
     ArrayList<RecipyInfo> alelist = new ArrayList<>();
 
-    boolean All = true; //need change    all, can , alert
+    int All = 0; //need change    can, all , alert
 
     //더미
     int image;
@@ -86,8 +86,8 @@ public class Recipy extends Activity {
         recipylist = (ArrayList<RecipyInfo>) rxIntent.getSerializableExtra("Object");
         alelist = (ArrayList<RecipyInfo>) rxIntent.getSerializableExtra("Alert");
 
-        templist = (ArrayList<RecipyInfo>) recipylist.clone();
-        sublist = (ArrayList<RecipyInfo>) templist.clone();
+        templist = (ArrayList<RecipyInfo>) recipylist.clone();      //recipy temp <- 가능 레시피
+        sublist = (ArrayList<RecipyInfo>) templist.clone();         //temp temp <- 가능레시피
         adapter = new ListAdapter();
         //adapter 에 리스트 추가 <-밑의 버튼 리스너에 각각 지정 (어떤 객체를 지정할지는 미리 설정)
        /*
@@ -126,8 +126,8 @@ public class Recipy extends Activity {
         Recent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(All){
-                    All = false;
+                if(All == 0){
+                    All = 1;
                     Recent.setText("전체 레시피");
                     recipylist.clear();
                     adapter.clear();
@@ -140,12 +140,25 @@ public class Recipy extends Activity {
                     list.setAdapter(adapter);
 
                 }
-                else{
-                    All = true;
+                else if(All == 2){
+                    All = 0;
                     Recent.setText("만들 수 있는 레시피");
                     recipylist.clear();
                     adapter.clear();
-                    recipylist =(ArrayList<RecipyInfo>) templist.clone();
+                    recipylist =(ArrayList<RecipyInfo>) sublist.clone();
+                    int size = recipylist.size();
+                    for(int i = 0; i < size; i++){
+                        adapter.addItem(new ListItem(recipylist.get(i)));
+                    }
+
+                    list.setAdapter(adapter);
+                }
+                else{
+                    All = 2;
+                    Recent.setText("유통기한 임박재료 가능 레시피");
+                    recipylist.clear();
+                    adapter.clear();
+                    recipylist =(ArrayList<RecipyInfo>) alelist.clone();
                     int size = recipylist.size();
                     for(int i = 0; i < size; i++){
                         adapter.addItem(new ListItem(recipylist.get(i)));
@@ -200,9 +213,13 @@ public class Recipy extends Activity {
                         recipylist = (ArrayList<RecipyInfo>) templist.clone();
                         recipylist.clear();
                         adapter.clear();
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
 
                         recipylist = (ArrayList<RecipyInfo>)findCategory(templist, "한식").clone();
@@ -229,9 +246,13 @@ public class Recipy extends Activity {
                         recipylist = (ArrayList<RecipyInfo>) templist.clone();
                         recipylist.clear();
                         adapter.clear();
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
 
                         recipylist = (ArrayList<RecipyInfo>)findCategory(templist, "중식").clone();
@@ -255,9 +276,13 @@ public class Recipy extends Activity {
                         recipylist = (ArrayList<RecipyInfo>) templist.clone();
                         recipylist.clear();
                         adapter.clear();
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
 
                         recipylist = (ArrayList<RecipyInfo>)findCategory(templist, "양식").clone();
@@ -280,9 +305,13 @@ public class Recipy extends Activity {
                         ListAdapter adapter3 = new ListAdapter();
                         templist = (ArrayList<RecipyInfo>) sublist.clone();
                         recipylist = (ArrayList<RecipyInfo>) templist.clone();
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
                         recipylist.clear();
                         adapter.clear();
@@ -304,9 +333,13 @@ public class Recipy extends Activity {
                         Boon.setBackgroundResource(R.drawable.button_push);
 
 
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
                         recipylist.clear();
                         adapter.clear();
@@ -330,9 +363,13 @@ public class Recipy extends Activity {
                         recipylist = (ArrayList<RecipyInfo>) templist.clone();
                         recipylist.clear();
                         adapter.clear();
-                        if(!All){
+                        if(All == 1){
                             templist.clear();
                             templist = (ArrayList<RecipyInfo>) mainlist.clone();
+                        }
+                        else if(All == 2){
+                            templist.clear();
+                            templist = (ArrayList<RecipyInfo>) alelist.clone();
                         }
                         recipylist = (ArrayList<RecipyInfo>)findCategory(templist, "기타").clone();
                         size = recipylist.size();

@@ -111,6 +111,7 @@ public class CoolFragment extends Fragment {
             foodArrayList = data.getParcelableArrayList("Food");
         }
         else{
+
         }
 
 

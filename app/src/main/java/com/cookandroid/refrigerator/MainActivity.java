@@ -1515,37 +1515,75 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
             Toast.makeText(getApplicationContext(), "name = " + food.getName() +" date = "+food.getExpiration_date()+" date2 = "+food.getInput_date()+" ",Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), "cool = " + food.getCool() +" sto = "+food.getStorage()+" image = "+food.getImage()+" ",Toast.LENGTH_LONG).show();
 
-
-            if(food.getCool() == 0){
-                coollist.set(point, food);
-                foodlist = (ArrayList<Food>) coollist.clone();
-                for(int i = 0; i < icelist.size(); i++){
-                    foodlist.add(icelist.get(i));
+            if(isitSearch){
+                searchlist.set(point, food);
+                for(int i = 0; i < foodlist.size(); ){
+                    if(searchname.equals(foodlist.get(i).getName())){
+                        if(point == 0){
+                            foodlist.set(i, food);
+                            break;
+                        }
+                        else{
+                            point--;
+                            i++;
+                        }
+                    }
+                    else{
+                        i++;
+                    }
                 }
-                CoolFragment fragCool = new CoolFragment();
-                Bundle data2 = new Bundle();
-                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
-                fragCool.setArguments(data2);
+                icelist.clear();
+                coollist.clear();
+                for(int i = 0; i < foodlist.size(); i++){
+                    if(foodlist.get(i).getCool() == 0){
+                        coollist.add(foodlist.get(i));
+                    }
+                    else{
+                        icelist.add(foodlist.get(i));
+                    }
+                }
 
-                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
-                fragmentTransaction2.commit();
+                CoolFragment searchfragment = new CoolFragment();
+                Bundle searchdata = new Bundle();
+                FragmentTransaction fragmentTransactionsear = getSupportFragmentManager().beginTransaction();
+                searchdata.putParcelableArrayList("Food", searchlist);
+                searchfragment.setArguments(searchdata);
+                fragmentTransactionsear.add(R.id.frame_layout, searchfragment);
+                fragmentTransactionsear.commit();
             }
             else{
-                icelist.set(point, food);
-                foodlist = (ArrayList<Food>) icelist.clone();
-                for(int i = 0; i < coollist.size(); i++){
-                    foodlist.add(coollist.get(i));
-                }
-                IceFragment fragice = new IceFragment();
-                Bundle data2 = new Bundle();
-                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) icelist);
-                fragice.setArguments(data2);
+                if(food.getCool() == 0){
+                    coollist.set(point, food);
+                    foodlist = (ArrayList<Food>) coollist.clone();
+                    for(int i = 0; i < icelist.size(); i++){
+                        foodlist.add(icelist.get(i));
+                    }
+                    CoolFragment fragCool = new CoolFragment();
+                    Bundle data2 = new Bundle();
+                    data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
+                    fragCool.setArguments(data2);
 
-                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction2.replace(R.id.frame_layout, fragice);
-                fragmentTransaction2.commit();
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.frame_layout, fragCool);
+                    fragmentTransaction2.commit();
+                }
+                else{
+                    icelist.set(point, food);
+                    foodlist = (ArrayList<Food>) icelist.clone();
+                    for(int i = 0; i < coollist.size(); i++){
+                        foodlist.add(coollist.get(i));
+                    }
+                    IceFragment fragice = new IceFragment();
+                    Bundle data2 = new Bundle();
+                    data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) icelist);
+                    fragice.setArguments(data2);
+
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.frame_layout, fragice);
+                    fragmentTransaction2.commit();
+                }
             }
+
 
             Toast.makeText(getApplicationContext(), " 수정이 완료 되었습니다 !", Toast.LENGTH_SHORT).show();
         }

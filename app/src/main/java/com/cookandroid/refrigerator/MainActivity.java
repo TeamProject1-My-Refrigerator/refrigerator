@@ -1508,25 +1508,20 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
 
         }
         else if(resultCode == 6){
-            if(data != null){
-                int point = data.getIntExtra("Point", 0);
-                Food food = data.getParcelableExtra("Foodchange");
+            int point = data.getIntExtra("Point", 0);
 
-                if(food.getCool() == 0){
-                    coollist.set(point, food);
-                    foodlist = (ArrayList<Food>) coollist.clone();
-                    for(int i = 0; i < icelist.size(); i++){
-                        foodlist.add(icelist.get(i));
-                    }
-                }
-                else{
-                    icelist.set(point, food);
-                    foodlist = (ArrayList<Food>) icelist.clone();
-                    for(int i = 0; i < coollist.size(); i++){
-                        foodlist.add(coollist.get(i));
-                    }
-                }
+            Food food = new Food(data.getStringExtra("Name"), data.getStringExtra("Date"), data.getStringExtra("Date2"), data.getIntExtra("Coolcha", 0), data.getStringExtra("Sto"), data.getIntExtra("Image", 0));
 
+            Toast.makeText(getApplicationContext(), "name = " + food.getName() +" date = "+food.getExpiration_date()+" date2 = "+food.getInput_date()+" ",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "cool = " + food.getCool() +" sto = "+food.getStorage()+" image = "+food.getImage()+" ",Toast.LENGTH_LONG).show();
+
+
+            if(food.getCool() == 0){
+                coollist.set(point, food);
+                foodlist = (ArrayList<Food>) coollist.clone();
+                for(int i = 0; i < icelist.size(); i++){
+                    foodlist.add(icelist.get(i));
+                }
                 CoolFragment fragCool = new CoolFragment();
                 Bundle data2 = new Bundle();
                 data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
@@ -1536,8 +1531,21 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 fragmentTransaction2.replace(R.id.frame_layout, fragCool);
                 fragmentTransaction2.commit();
             }
+            else{
+                icelist.set(point, food);
+                foodlist = (ArrayList<Food>) icelist.clone();
+                for(int i = 0; i < coollist.size(); i++){
+                    foodlist.add(coollist.get(i));
+                }
+                IceFragment fragice = new IceFragment();
+                Bundle data2 = new Bundle();
+                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) icelist);
+                fragice.setArguments(data2);
 
-
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.frame_layout, fragice);
+                fragmentTransaction2.commit();
+            }
 
             Toast.makeText(getApplicationContext(), " 수정이 완료 되었습니다 !", Toast.LENGTH_SHORT).show();
         }
@@ -1545,31 +1553,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         else{
             if(data != null){
                 int point = data.getIntExtra("Point", 0);
-                Food food = data.getParcelableExtra("Foodchange");
 
-                if(food.getCool() == 0){
-                    coollist.set(point, food);
-                    foodlist = (ArrayList<Food>) coollist.clone();
-                    for(int i = 0; i < icelist.size(); i++){
-                        foodlist.add(icelist.get(i));
-                    }
-                }
-                else{
-                    icelist.set(point, food);
-                    foodlist = (ArrayList<Food>) icelist.clone();
-                    for(int i = 0; i < coollist.size(); i++){
-                        foodlist.add(coollist.get(i));
-                    }
-                }
-
-                CoolFragment fragCool = new CoolFragment();
-                Bundle data2 = new Bundle();
-                data2.putParcelableArrayList("Food", (ArrayList<? extends Parcelable>) coollist);
-                fragCool.setArguments(data2);
-
-                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction2.replace(R.id.frame_layout, fragCool);
-                fragmentTransaction2.commit();
             }
             else{
 

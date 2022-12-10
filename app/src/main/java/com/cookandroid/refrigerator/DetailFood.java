@@ -23,6 +23,9 @@ public class DetailFood extends Activity {
     String date = "";
     String storagy = "";
     String indate = "";
+    String dateonly;
+    String indateonly;
+    String storageonly;
     int image = R.drawable.apple;
     int point;
     int cool;
@@ -52,8 +55,11 @@ public class DetailFood extends Activity {
         name = extras.getString("Name");
         change = false;
         date = "유통기한"+"\n"+ extras.getString("Date");
+        dateonly = extras.getString("Date");
         indate = "입고날짜"+"\n"+extras.getString("Indate");
+        indateonly = extras.getString("Indate");
         storagy = "<보관방법>\n\n" + extras.getString("Storagy");
+        storageonly = extras.getString("Storagy");
 
         //point 값에 위치 저장 ->다시 main activity 에 전달하여 리스트 수정
         point = extras.getInt("Point");
@@ -90,9 +96,9 @@ public class DetailFood extends Activity {
                     food_name_chan.setVisibility(View.VISIBLE);
                     food_name_chan.setText(food_name.getText());
                     food_datechan.setVisibility(View.VISIBLE);
-                    food_datechan.setText(food_date.getText());
+                    food_datechan.setText(dateonly);
                     food_indatechan.setVisibility(View.VISIBLE);
-                    food_indatechan.setText(food_indate.getText());
+                    food_indatechan.setText(indateonly);
                     food_storagychan.setVisibility(View.VISIBLE);
                     food_storagychan.setText(food_storagy.getText());
                     //text
@@ -107,9 +113,12 @@ public class DetailFood extends Activity {
                     change=false;
 
                     name = food_name_chan.getText().toString();
-                    indate = food_indatechan.getText().toString();
-                    date = food_datechan.getText().toString();
-                    storagy = food_storagychan.getText().toString();
+                    indate = "입고기한"+"\n"+food_indatechan.getText().toString();
+                    date = "유통기한"+"\n"+food_datechan.getText().toString();
+                    dateonly = food_datechan.getText().toString();
+                    indateonly = food_indatechan.getText().toString();
+                    storagy = "<보관방법>\n\n" + food_storagychan.getText().toString();
+                    storageonly = food_storagychan.getText().toString();
 
                     //text
                     food_name.setVisibility(View.VISIBLE);
@@ -129,10 +138,18 @@ public class DetailFood extends Activity {
                     foodchan.setText("수정하기");
                     //Food food = new Food(name, expdate, inputdate, cool, "보관법", R.drawable.apple);
 
-                    Food food = new Food(name, date, indate, cool, storagy, image);
+                    //<-오류 발생 지점 생성 문제 한개씩 체크
+                    Food food = new Food(name, dateonly, indateonly, cool, storageonly, image);
 
                     Intent outintentf = new Intent(getApplicationContext(), MainActivity.class);
                     outintentf.putExtra("Point", point);
+                    outintentf.putExtra("Name", name);
+                    outintentf.putExtra("Date", dateonly);
+                    outintentf.putExtra("Date2", indateonly);
+                    outintentf.putExtra("Coolcha", cool);
+                    outintentf.putExtra("Sto", storageonly);
+                    outintentf.putExtra("Image", image);
+
                     outintentf.putExtra("Foodchange", food);
 
                     setResult(6, outintentf);

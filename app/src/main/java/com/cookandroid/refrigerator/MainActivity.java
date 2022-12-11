@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ImageButton btnIce;                               //레시피 , 냉장버튼
     ImageButton btnplusa;
     ImageButton btnSetting;
-    Button search;
+    ImageButton search;
     Button close;
     EditText search_bar;
     TextView merge;
@@ -728,6 +728,9 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent fcm = new Intent(getApplicationContext(), MyFirebaseMessagingService.class);
+        startService(fcm);
+
         btnRecipy = (ImageButton)findViewById(R.id.btnRecipy);
         btnIce = (ImageButton) findViewById(R.id.btnIce);
         btnMerge = (ImageButton)findViewById(R.id.btnMerge);
@@ -735,7 +738,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         btnSetting = (ImageButton) findViewById(R.id.btnsetting);
         btnHome = (ImageButton) findViewById(R.id.btnHome);
         layout = (LinearLayout) findViewById(R.id.layout_tool);
-        search = (Button)findViewById(R.id.btnchange);
+        search = (ImageButton)findViewById(R.id.btnchange);
         search_bar = (EditText)findViewById(R.id.edtsearch);
         close = (Button)findViewById(R.id.btnclose);
 
@@ -880,18 +883,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 isItDDay = 0;
                 btnIce.setImageResource(R.drawable.coolout);
                 isitSearch = false;
-                coollist.clear();
-                icelist.clear();
-                size = foodlist.size();
-                for(int i = 0; i < size;i++){
-                    if(foodlist.get(i).getCool() == 0){
-                        coollist.add(foodlist.get(i));
-                    }
-                    else{
-                        icelist.add(foodlist.get(i));
 
-                    }
-                }
 
                 CoolFragment fragCool = new CoolFragment();
                 Bundle data = new Bundle();
@@ -1711,5 +1703,24 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
 
     public void setFoodlist(ArrayList<Food> newFoodlist){
         foodlist = newFoodlist;
+        coollist.clear();
+        icelist.clear();
+        size = foodlist.size();
+        for(int i = 0; i < size;i++){
+            if(foodlist.get(i).getCool() == 0){
+                coollist.add(foodlist.get(i));
+            }
+            else{
+                icelist.add(foodlist.get(i));
+
+            }
+        }
+    }
+    public int getPushday_count(){
+        return pushday_count;
+    }
+
+    public int getIspush(){
+        return ispush;
     }
 }

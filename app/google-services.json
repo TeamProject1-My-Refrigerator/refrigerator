@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "679013830256",
+    "project_id": "android-a8cf8",
+    "storage_bucket": "android-a8cf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679013830256:android:2bb6406561a90b6dc42eb5",
+        "android_client_info": {
+          "package_name": "com.cookandroid.refrigerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679013830256-0v3f384qtftjq8rn15dffaoa6tu4oafv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cookandroid.refrigerator",
+            "certificate_hash": "602950be257501865984d362d8fc71b86c8f482c"
+          }
+        },
+        {
+          "client_id": "679013830256-t84n87ilnm9t9bsocvc1jib1qvmick3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_davhXov7c8YFDhqh-12eo4EjL-umvE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679013830256-t84n87ilnm9t9bsocvc1jib1qvmick3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

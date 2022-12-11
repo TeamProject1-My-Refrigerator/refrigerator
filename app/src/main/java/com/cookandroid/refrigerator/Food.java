@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

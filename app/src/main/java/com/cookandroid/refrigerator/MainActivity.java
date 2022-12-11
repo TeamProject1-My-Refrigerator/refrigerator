@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
     ArrayList<Food> coollist = new ArrayList<>();
     ArrayList<Food> alertfoodlist = new ArrayList<>();
     ArrayList<Food> searchlist = new ArrayList<>();
-
+    ArrayList<Food> sendfoodlist = new ArrayList<>();
+    public static Context mainContext;
 
 
 
@@ -737,6 +739,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         search_bar = (EditText)findViewById(R.id.edtsearch);
         close = (Button)findViewById(R.id.btnclose);
 
+        mainContext = this;
+
 
 
         IceFragment fragice = new IceFragment();
@@ -876,6 +880,18 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 isItDDay = 0;
                 btnIce.setImageResource(R.drawable.coolout);
                 isitSearch = false;
+                coollist.clear();
+                icelist.clear();
+                size = foodlist.size();
+                for(int i = 0; i < size;i++){
+                    if(foodlist.get(i).getCool() == 0){
+                        coollist.add(foodlist.get(i));
+                    }
+                    else{
+                        icelist.add(foodlist.get(i));
+
+                    }
+                }
 
                 CoolFragment fragCool = new CoolFragment();
                 Bundle data = new Bundle();
@@ -937,6 +953,9 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                     }
                 }
 
+                sendfoodlist = (ArrayList<Food>) foodlist.clone();
+                mergeSort(sendfoodlist,0,foodlistDDaySort.size()-1);
+
                 sendlist = (ArrayList<RecipyInfo>) findRecipe(recipylist, foodlist).clone();
                 alertlist = (ArrayList<RecipyInfo>) findRecipe(recipylist, alertfoodlist).clone();
 
@@ -944,6 +963,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 intent.putExtra("Main", recipylist);
                 intent.putExtra("Object", sendlist);
                 intent.putExtra("Alert", alertlist);
+                //intent.putExtra("Foodlist", sendfoodlist);
                 startActivity(intent);
             }
         });
@@ -1681,4 +1701,15 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         }
     }
      */
+
+    public ArrayList<Food> getFoodlist(){
+        sendfoodlist = (ArrayList<Food>) foodlist.clone();
+        mergeSort(sendfoodlist,0,sendfoodlist.size()-1);
+
+        return sendfoodlist;
+    }
+
+    public void setFoodlist(ArrayList<Food> newFoodlist){
+        foodlist = newFoodlist;
+    }
 }

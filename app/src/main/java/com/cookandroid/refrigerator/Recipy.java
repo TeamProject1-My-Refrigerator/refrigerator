@@ -32,6 +32,7 @@ public class Recipy extends Activity {
     ArrayList<RecipyInfo> templist = new ArrayList<>();
     ArrayList<RecipyInfo> sublist = new ArrayList<>();
     ArrayList<RecipyInfo> alelist = new ArrayList<>();
+    //ArrayList<Food> sendfoodlist = new ArrayList<>();
 
     int All = 0; //need change    can, all , alert
 
@@ -85,6 +86,7 @@ public class Recipy extends Activity {
         mainlist = (ArrayList<RecipyInfo>) rxIntent.getSerializableExtra("Main");
         recipylist = (ArrayList<RecipyInfo>) rxIntent.getSerializableExtra("Object");
         alelist = (ArrayList<RecipyInfo>) rxIntent.getSerializableExtra("Alert");
+        //sendfoodlist = (ArrayList<Food>) rxIntent.getSerializableExtra("Foodlist");
 
         templist = (ArrayList<RecipyInfo>) recipylist.clone();      //recipy temp <- 가능 레시피
         sublist = (ArrayList<RecipyInfo>) templist.clone();         //temp temp <- 가능레시피

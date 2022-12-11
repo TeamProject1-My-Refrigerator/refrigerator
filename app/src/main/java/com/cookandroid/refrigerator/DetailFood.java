@@ -150,8 +150,6 @@ public class DetailFood extends Activity {
                     outintentf.putExtra("Sto", storageonly);
                     outintentf.putExtra("Image", image);
 
-                    outintentf.putExtra("Foodchange", food);
-
                     setResult(6, outintentf);
 
 

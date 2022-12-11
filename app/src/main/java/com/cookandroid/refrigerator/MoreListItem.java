@@ -11,6 +11,8 @@ public class MoreListItem {
      */
     private int image;
     private String name;
+    private String exdate;
+    private String indate;
     public View.OnClickListener onClickListener;
 
 
@@ -26,12 +28,15 @@ public class MoreListItem {
     public void setName(String name){
         this.name = name;
     }
+    public String getExdate(){return exdate;}
+    public String getIndate(){return indate;}
 
 
-
-    MoreListItem(int image, String name, View.OnClickListener clickListener){
+    MoreListItem(int image, String name, View.OnClickListener clickListener, String exdate, String indate){
         this.image = image;
         this.name = name;
+        this.exdate = exdate;
+        this.indate = indate;
         this.onClickListener = clickListener;
     }
 

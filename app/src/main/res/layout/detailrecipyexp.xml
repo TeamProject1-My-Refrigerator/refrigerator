@@ -2,23 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#F8F8F8"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_margin="15dp"
         android:id="@+id/btnback"
-        android:text="돌아가기" />
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:background="@drawable/button20"
+        android:text="레시피 설명으로 돌아가기" />
+
+    <LinearLayout
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/layout10"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="105dp"
+            android:id="@+id/moreimage"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/apple"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/morename"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:text="dlfma"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/moreimage"
-        android:layout_weight="1"
-        android:src="@drawable/apple"/>
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:id="@+id/intro"
+        android:src="@drawable/intro" />
+
+
 
     <ListView
         android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:background="#FFFFFF"
         android:layout_height="0dp"
         android:id="@+id/morelist"
         android:layout_weight="5" />

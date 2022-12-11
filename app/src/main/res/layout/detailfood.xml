@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:background="#F8F8F8"
     android:layout_height="match_parent" android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="right"
+        android:background="#F8F8F8"
         android:layout_weight="1" >
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnfoodchange"
-            android:text="재료수정"
+            android:text="수정"
             android:textSize="20dp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_blue" />
+            android:background="@drawable/button20" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnfoodsub"
-            android:text="재료삭제"
+            android:text="삭제"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+
             android:textSize="20dp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_blue" />
+            android:background="@drawable/button20" />
 
 
     </LinearLayout>
@@ -34,7 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/line"
+        android:background="@drawable/layout50"
         android:layout_weight="3" >
 
         <ImageView
@@ -42,9 +49,8 @@
             android:layout_height="match_parent"
             android:id="@+id/food_image"
             android:scaleType="fitXY"
-            android:background="#FFFFFF"
-
-            android:layout_marginBottom="1dp"
+            android:background="@drawable/layout50"
+            android:layout_margin="10dp"
             android:src="@color/teal_700"/>
 
     </LinearLayout>
@@ -52,7 +58,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/line"
+        android:layout_margin="15dp"
         android:orientation="vertical"
         android:layout_weight="1" >
 
@@ -61,6 +67,8 @@
             android:layout_height="match_parent"
             android:id="@+id/food_name"
             android:textStyle="bold"
+            android:background="@drawable/layout50"
+
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25dp"
@@ -72,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/food_name_change"
+            android:gravity="center"
             android:text="edittext"
             android:textColor="@color/black"
             android:textSize="25dp"
@@ -84,7 +93,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/line"
+        android:background="#F8F8F8"
         android:orientation="horizontal"
         android:layout_weight="2" >
 
@@ -93,6 +102,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/food_date"
+            android:background="@drawable/layout50"
             android:layout_margin="8dp"
             android:gravity="center"
             android:textColor="@color/black"
@@ -104,6 +114,7 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             android:gravity="center"
+            android:background="@drawable/layout50"
             android:textColor="@color/black"
             android:text="입고날짜"
             android:id="@+id/food_indate" />
@@ -136,14 +147,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         android:layout_weight="3" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/food_storagy"
-            android:layout_marginLeft="8dp"
+            android:background="@drawable/layout50"
 
+            android:gravity="center_horizontal"
+            android:layout_margin="15dp"
             android:text="보관법" />
 
         <EditText
@@ -151,7 +165,7 @@
             android:layout_height="match_parent"
             android:id="@+id/food_storagycha"
             android:layout_marginLeft="8dp"
-
+            android:gravity="center_horizontal"
             android:visibility="gone"
             android:text="보관법\n" />
 

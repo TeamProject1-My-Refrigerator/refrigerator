@@ -935,7 +935,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
         btnRecipy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layout.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.GONE);
                 ButtonInit();
                 btnRecipy.setImageResource(R.drawable.recipy_on);
                 alertfoodlist.clear();

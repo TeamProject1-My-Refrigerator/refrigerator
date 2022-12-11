@@ -62,7 +62,7 @@ public class DetailRecipy extends Activity {
         name = recipyInfo.getName() ;
         recipy = recipyInfo.getDesc();
         image = recipyInfo.getPicture();
-        need = "필수 재료"+"\n";
+        need = "";
         size = recipyInfo.getEssentialIngredients().size()-1;
         i = 0;
         while( i < size){
@@ -70,14 +70,14 @@ public class DetailRecipy extends Activity {
             i++;
         }
         need = need + recipyInfo.getEssentialIngredients().get(i);
-        more = "추가 재료"+"\n";
+        more = "";
         size = recipyInfo.getAdditionalIngredients().size()-1;
         i = 0;
         while( i < size ){
             more = more + recipyInfo.additionalIngredients.get(i)+", ";
             i++;
         }
-        need = need + recipyInfo.getAdditionalIngredients().get(i);
+        more = more + recipyInfo.getAdditionalIngredients().get(i);
         video = recipyInfo.getYoutubeLink();
         recipy_name.setText(name);
         recipy_recipy.setText(recipy);

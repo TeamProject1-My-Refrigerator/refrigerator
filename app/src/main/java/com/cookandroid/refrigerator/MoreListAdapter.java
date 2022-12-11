@@ -48,8 +48,8 @@ public class MoreListAdapter extends BaseAdapter{
         ImageButton imageButton = ConvertView.findViewById(R.id.morelist_item_button);
 
         imageView.setImageResource(morelistItem.getImage());
-        textView.setText(morelistItem.getName());
-        imageButton.setImageResource(R.drawable.button_blue);
+        textView.setText(morelistItem.getName()  +  "\n유통기한 : "  +morelistItem.getExdate()+  "\n입고날짜 : "+morelistItem.getIndate() );
+        imageButton.setImageResource(R.drawable.deletebutton);
 
         imageButton.setOnClickListener(items.get(position).onClickListener);
 

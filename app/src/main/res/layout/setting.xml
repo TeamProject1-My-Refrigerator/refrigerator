@@ -8,144 +8,216 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F8F8F8"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal" >
 
         <android.widget.Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="알림"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:gravity="center"
             android:background="@drawable/button_blue"
+            android:text="알림"
             android:id="@+id/alertname" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#F8F8F8"
-            android:orientation="vertical" >
+            android:layout_width="250dp"
+            android:padding="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="150dp"
+            android:background="@drawable/layout50"
+            android:gravity="right"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="푸쉬알림 기준(남은 유통기한)" />
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="푸쉬알림 on/off" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#F8F8F8"
-
-                android:orientation="horizontal" >
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <android.widget.Button
+                    android:id="@+id/btnon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn1day"
-                    android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
                     android:background="@drawable/button_mini"
-                    android:text="1일" />
+
+                    android:text="on" />
 
                 <android.widget.Button
+                    android:id="@+id/btnoff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn3day"
-                    android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:textSize="20dp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
 
                     android:background="@drawable/button_mini"
-                    android:text="3일" />
+                    android:text="off" />
 
-                <android.widget.Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn5day"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_mini"
-                    android:text="5일"
-                    android:layout_margin="8dp" />
-
-                <android.widget.Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn7day"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/button_mini"
-                    android:text="1주" />
 
             </LinearLayout>
 
 
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F8F8F8"
-        android:gravity="right"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="푸쉬알림 on/off" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#F8F8F8"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <android.widget.Button
-                android:id="@+id/btnon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/button_mini"
-
-                android:text="on" />
-
-            <android.widget.Button
-                android:id="@+id/btnoff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-
-                android:background="@drawable/button_mini"
-                android:text="off" />
-
 
         </LinearLayout>
 
-        <android.widget.Button
-            android:id="@+id/btnhelp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/button_blue"
-            android:text="도움말" />
+
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/layout50"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:text="푸쉬알림 기준(남은 유통기한)" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal" >
+
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn1day"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_mini"
+                android:text="1일" />
+
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn3day"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+
+                android:background="@drawable/button_mini"
+                android:text="3일" />
+
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn5day"
+                android:layout_weight="1"
+                android:background="@drawable/button_mini"
+                android:text="5일"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_margin="8dp" />
+
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn7day"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_mini"
+                android:text="1주" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp" >
+
+        <android.widget.Button
+            android:id="@+id/btnhelp"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/button_blue"
+            android:text="도움말" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/layout50" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/imgimg"
+                android:scaleType="fitXY"
+
+                android:src="@drawable/helptap" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <android.widget.Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:gravity="center"
             android:background="@drawable/button_blue"
-            android:text="저장"
+            android:text="저장하기"
             android:id="@+id/setsave" />
 
     </LinearLayout>

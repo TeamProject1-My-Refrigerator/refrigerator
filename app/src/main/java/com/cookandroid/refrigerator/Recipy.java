@@ -69,7 +69,6 @@ public class Recipy extends Activity {
         Boon = (Button)findViewById(R.id.btnboon);
         Etc = (Button)findViewById(R.id.btnetc);
         list = (ListView)findViewById(R.id.listview);
-        alert = (Button)findViewById(R.id.btnalert);
 
         Recent.setText("만들 수 있는 레시피");
 

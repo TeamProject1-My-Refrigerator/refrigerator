@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,9 +15,10 @@ import java.util.ArrayList;
 public class moreRecipy extends Activity implements View.OnClickListener{
 
     Button back;
-    ImageView foodimag;
+    ImageView foodimag, intro;
     ListView morelist;
     MoreListAdapter adapter;
+    TextView morename;
     ArrayList<Food> foodArrayList = new ArrayList<>();
     ArrayList<String> tag = new ArrayList<>();
     ArrayList<String> temp = new ArrayList<>();
@@ -35,11 +37,15 @@ public class moreRecipy extends Activity implements View.OnClickListener{
 
         morelist = (ListView)findViewById(R.id.morelist);
 
+        morename = (TextView)findViewById(R.id.morename);
+        intro = (ImageView)findViewById(R.id.intro);
         adapter = new MoreListAdapter();
         Intent rxIntent = getIntent();
         Bundle extras = rxIntent.getExtras();
 
         recipyInfo = (RecipyInfo) extras.getSerializable("Object");
+        foodimag.setImageResource(recipyInfo.getPicture());
+        morename.setText(recipyInfo.getName());
         tag = (ArrayList<String>) recipyInfo.getEssentialIngredients().clone();
 
         foodArrayList = findUsingFood();
@@ -47,7 +53,7 @@ public class moreRecipy extends Activity implements View.OnClickListener{
         size = foodArrayList.size();
 
         for(int i = 0; i < size; i++){
-            adapter.addItem(new MoreListItem(foodArrayList.get(i).getImage(), foodArrayList.get(i).getName(), this));
+            adapter.addItem(new MoreListItem(foodArrayList.get(i).getImage(), foodArrayList.get(i).getName(), this, foodArrayList.get(i).getExpiration_date(), foodArrayList.get(i).getInput_date()));
         }
 
         morelist.setAdapter(adapter);
@@ -109,7 +115,7 @@ public class moreRecipy extends Activity implements View.OnClickListener{
         int size = foodArrayList.size();
 
         for(int i = 0; i < size; i++){
-            adapter.addItem(new MoreListItem(foodArrayList.get(i).getImage(), foodArrayList.get(i).getName(), this));
+            adapter.addItem(new MoreListItem(foodArrayList.get(i).getImage(), foodArrayList.get(i).getName(), this, foodArrayList.get(i).getExpiration_date(), foodArrayList.get(i).getInput_date()));
         }
 
         morelist.setAdapter(adapter);

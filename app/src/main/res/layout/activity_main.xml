@@ -26,10 +26,15 @@
             android:orientation="horizontal"
             android:background="#F8F8F8">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnclose"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:background="@drawable/button_blue"
                 android:visibility="gone"
                 android:text="닫기" />
 
@@ -54,7 +59,7 @@
                 android:id="@+id/btnIce" />
 
             <EditText
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
                 android:id="@+id/edtsearch"

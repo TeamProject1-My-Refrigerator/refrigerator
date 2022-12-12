@@ -940,7 +940,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
                 btnRecipy.setImageResource(R.drawable.recipy_on);
                 alertfoodlist.clear();
                 for(int i = 0; i < foodlist.size(); i++){
-                    if( 0 <= foodlist.get(i).getExpiration_dday() &&foodlist.get(i).getExpiration_dday() <= 3){
+                    if( 0 <= foodlist.get(i).getExpiration_dday() &&foodlist.get(i).getExpiration_dday() <= pushday_count){
                         alertfoodlist.add(foodlist.get(i));
                     }
                 }
@@ -1524,8 +1524,8 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
 
             Food food = new Food(data.getStringExtra("Name"), data.getStringExtra("Date"), data.getStringExtra("Date2"), data.getIntExtra("Coolcha", 0), data.getStringExtra("Sto"), data.getIntExtra("Image", 0));
 
-            Toast.makeText(getApplicationContext(), "name = " + food.getName() +" date = "+food.getExpiration_date()+" date2 = "+food.getInput_date()+" ",Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "cool = " + food.getCool() +" sto = "+food.getStorage()+" image = "+food.getImage()+" ",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "name = " + food.getName() +" date = "+food.getExpiration_date()+" date2 = "+food.getInput_date()+" ",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "cool = " + food.getCool() +" sto = "+food.getStorage()+" image = "+food.getImage()+" ",Toast.LENGTH_LONG).show();
 
             if(isitSearch){
                 searchlist.set(point, food);
@@ -1608,7 +1608,7 @@ public class MainActivity extends AppCompatActivity implements FoodPlus.Fragment
             else{
 
             }
-            Toast.makeText(getApplicationContext(), " 변경이 완료되지 않음 !", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), " 변경이 완료되지 않음 !", Toast.LENGTH_SHORT).show();
 
 
         }

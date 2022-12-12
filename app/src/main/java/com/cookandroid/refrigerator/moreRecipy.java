@@ -59,7 +59,7 @@ public class moreRecipy extends Activity implements View.OnClickListener{
         morelist.setAdapter(adapter);
 
         for (int i = 0; i < foodArrayList.size(); i++){
-            Toast.makeText(getApplicationContext(), foodArrayList.get(i).getName(), Toast.LENGTH_SHORT ).show();
+            //Toast.makeText(getApplicationContext(), foodArrayList.get(i).getName(), Toast.LENGTH_SHORT ).show();
 
         }
 
@@ -120,7 +120,7 @@ public class moreRecipy extends Activity implements View.OnClickListener{
 
         morelist.setAdapter(adapter);
 
-        Toast.makeText(getApplicationContext(), "click" + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "click" + position, Toast.LENGTH_SHORT).show();
     }
 
     public void deleteFood(String deletename) {
